@@ -222,10 +222,10 @@ class Experience:
         if pickups is not None and any(r['actor']==obj for r in pickups.records):
             return pickups.tick(obj,args,ret,fn)
         if ctx._actor is None or obj!=ctx._actor:return None
-        self.last_tick=ctx._clock()
         try:
             getattr(ctx,'_native_trace',_NO_TRACE).phase('interaction timer')
             now=ctx._clock()
+            self.last_tick=now
             slow=now>=getattr(self,'next_slow_tick',0)
             if slow:
                 self.next_slow_tick=now+.02
