@@ -556,7 +556,7 @@ def _spawn_machine_steps(args):
     if not math.isfinite(args.height) or not 100 <= args.height <= 400 or not math.isfinite(args.yaw):
         print("[Slots] Use a finite rotation and height between 100 and 400 cm.")
         return
-    _report = {"version": "0.141.0", "stage": "player"}
+    _report = {"version": "1.1.0", "stage": "player"}
     try:
         while not asset_cache.ready(_ROOT):yield 'waiting for authored data'
         pc = get_pc(possibly_loading=True)
@@ -1961,7 +1961,7 @@ def _enable():
     except Exception as error:_report['startup_error']=str(error)
 
 
-_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.0.0",
+_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.1.0",
           description="Physical slot machines with paid spins, native BL4 prizes, animated lighting, positional sound and permanent placements.",
           supported_games=Game.BL4, commands=[slots_audio_test, slots_auto_cash, slots_check, slots_collect, slots_diagnostics, slots_edit, slots_help, slots_level, slots_lights, slots_loot_enable, slots_machines, slots_move, slots_odds, slots_pearl_enable, slots_placements, slots_play, slots_remove, slots_rewards, slots_sounds, slots_spawn, slots_status, slots_test, slots_verify, slots_wallet],
           keybinds=[interact_slot_machine,collect_slot_winnings], hooks=[_character_loaded,_world_end_play], on_enable=_enable, on_disable=_disable)

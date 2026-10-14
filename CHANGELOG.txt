@@ -1,0 +1,17 @@
+Slot Machines - Changelog
+========================
+
+v1.1
+----
+- Fixed empty gear payouts on low-level characters caused by selecting
+  equipment types that had not unlocked yet.
+- Enhancements enter the reward mix at level 15; class mods enter at level 20.
+  Earlier characters receive other available gear of the winning rarity.
+- Applies to both editions, including the jackpot's guaranteed equipment
+  and its random loot burst.
+- Tests requesting a locked equipment type explain its required level
+  before starting a spin.
+
+v1.0
+----
+- Initial release.

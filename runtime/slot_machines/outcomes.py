@@ -21,6 +21,22 @@ CASH_WEIGHTS = {'cash_small':18,'cash_medium':5,'cash_large':2}
 TYPE_WEIGHTS = {'weapon':50,'classmod':10,'shield':10,'enhancement':10,'repkit':10,'ordnance':5,'heavy':5}
 JACKPOT_EQUIPMENT_WEIGHTS = {'classmod':20,'shield':20,'enhancement':20,'repkit':20,'ordnance':10,'heavy':10}
 JACKPOT_RARITIES = {'epic':80,'legendary':20}
+# BL4 starts dropping these categories only when their equipment slots unlock.
+EQUIPMENT_MIN_LEVEL = {'enhancement':15, 'classmod':20}
+
+
+def equipment_weights(level, jackpot=False):
+    """Filter category weights once at spin start; rarity odds stay unchanged."""
+    weights = JACKPOT_EQUIPMENT_WEIGHTS if jackpot else TYPE_WEIGHTS
+    return {kind:weight for kind,weight in weights.items()
+            if level >= EQUIPMENT_MIN_LEVEL.get(kind, 1)}
+
+
+def require_equipment_level(category, level):
+    minimum = EQUIPMENT_MIN_LEVEL.get(category, 1)
+    if level < minimum:
+        raise ValueError(f'{category.capitalize()} rewards unlock at level {minimum}; current level {level}')
+
 SUPPORTED = ('loss','cash_small','cash_medium','cash_large','common',
              'uncommon','rare','epic','legendary','grenade',
              'eridium_small','eridium_large','jackpot','pearl')

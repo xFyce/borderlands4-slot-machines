@@ -118,6 +118,7 @@ class LootRewards:
         location=ctx._call(ctx._actor,'K2_GetActorLocation')
         yaw=float(ctx._call(ctx._actor,'K2_GetActorRotation').Yaw)
         category=category or self.extra_rows.get(name,{}).get('category','weapon')
+        outcomes.require_equipment_level(category,stage)
         route=route_override or self.route(category,name)
         transform,position=self.payout_transform(location,yaw,ctx._model_height,route,category)
         currency_before=self.currency_balance(pc) if category=='eridium' else None
@@ -211,6 +212,7 @@ class LootRewards:
         category=self.extra_rows.get(name,{}).get('category',category)
         stage=stage if stage is not None else self.game_stage(pc)
         if type(stage) is not int or not 1<=stage<=200:raise ValueError('Use an integer item level from 1 to 200')
+        outcomes.require_equipment_level(category,stage)
         receipt={'state':'native spawn queued','rarity':rarity,'pool':name,'game_stage':stage,'category':category,
                  'note':'One free native item request after its payout opening is ready'}
         self.pending={'receipt':receipt,'player':pc,'stage':stage,'pool':name,'rarity':rarity,'category':category,'route':self.route(category,name)}
@@ -245,17 +247,22 @@ class LootRewards:
         rng=rng or random.SystemRandom()
         self.ensure_catalog()
         specs=[]
-        if category is not None and outcome['kind']!='weapon':raise ValueError('--type requires a rarity gear result')
+        level=profile['level']
+        if category is not None:
+            if outcome['kind']!='weapon':raise ValueError('--type requires a rarity gear result')
+            outcomes.require_equipment_level(category,level)
         if outcome['kind']=='weapon':
             if outcome['rarity']=='pearl':
                 if category not in (None,'weapon'):raise ValueError('Pearlescent reward supports native weapons only')
                 category='weapon'
-            else:category=category or outcomes.weighted_choice(outcomes.TYPE_WEIGHTS,rng)
+            else:category=category or outcomes.weighted_choice(outcomes.equipment_weights(level),rng)
             specs=[(category,outcome['rarity'])]
         elif outcome['kind']=='jackpot':
             guaranteed=outcomes.weighted_choice(outcomes.JACKPOT_RARITIES,rng)
             count=20
-            specs=[(outcomes.weighted_choice(outcomes.JACKPOT_EQUIPMENT_WEIGHTS,rng),guaranteed)]+[(outcomes.weighted_choice(outcomes.TYPE_WEIGHTS,rng),outcomes.weighted_choice({'common':35,'uncommon':35,'rare':20,'epic':9,'legendary':1},rng)) for _ in range(count)]
+            equipment=outcomes.equipment_weights(level,jackpot=True)
+            mixed=outcomes.equipment_weights(level)
+            specs=[(outcomes.weighted_choice(equipment,rng),guaranteed)]+[(outcomes.weighted_choice(mixed,rng),outcomes.weighted_choice({'common':35,'uncommon':35,'rare':20,'epic':9,'legendary':1},rng)) for _ in range(count)]
         elif outcome['kind']=='eridium':
             quantities=profile['eridium_quantities']
             count=quantities[0 if outcome['name']=='eridium_small' else 2]
