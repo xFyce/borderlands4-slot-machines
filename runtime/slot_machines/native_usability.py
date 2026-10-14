@@ -56,7 +56,10 @@ class NativeUsability:
         data.Prompt=unrealsdk.unreal.FGameDataHandle(type_id,prompt)
         data.CostRequirements.bUseAttributeCost=False
         entry.priority=1
-        actor.UsableActorState.ReplicatedDynamicInteractions=[entry]
+        # Keep an independently constructed entry, not a view into the actor's
+        # array. Inactive triggers must have no registered use entries at all.
+        self.nodes[kind]['interaction']=entry
+        actor.UsableActorState.ReplicatedDynamicInteractions=[]
         actor.UsableActorState.bInteractabilityLockedReplicated=False
         actor.bPrimaryUsabilityEnabled=False
         actor.bSecondaryUsabilityEnabled=False
@@ -169,13 +172,26 @@ class NativeUsability:
             node['position']=tuple(position)
         # Read the actual native flags, rather than trusting a Python cache
         # after loading, menu changes or the game disabling an interaction.
-        if (node['active']!=active or bool(actor.bPrimaryUsabilityEnabled)!=bool(active)
+        entries=actor.UsableActorState.ReplicatedDynamicInteractions
+        if (node['active']!=active or len(entries)!=int(bool(active))
+                or bool(actor.bPrimaryUsabilityEnabled)!=bool(active)
                 or bool(getattr(actor,'bActorEnableCollision',active))!=bool(active)):
+            # A disabled collision sphere alone can leave a cached native Use
+            # entry covering the prize. Remove it before refreshing the state.
+            actor.UsableActorState.ReplicatedDynamicInteractions=[node['interaction']] if active else []
+            actor.bPrimaryUsabilityEnabled=bool(active)
+            self.refresh(actor)
+            # The refresh may update native enablement; apply final flags after
+            # it so an inactive payout target cannot become selectable again.
             actor.bPrimaryUsabilityEnabled=bool(active)
             ctx._call(actor,'SetActorEnableCollision',bNewActorEnableCollision=bool(active))
-            self.refresh(actor)
             node['active']=bool(active)
             self.report(target_states={k:n['active'] for k,n in self.nodes.items()})
+            readbacks=self.ctx._report.get('native_usability',{}).get('target_readbacks',{})
+            readbacks[kind]={'primary_enabled':bool(actor.bPrimaryUsabilityEnabled),
+                             'collision_enabled':bool(getattr(actor,'bActorEnableCollision',active)),
+                             'registered_interactions':len(actor.UsableActorState.ReplicatedDynamicInteractions)}
+            self.report(target_readbacks=readbacks)
     def tick(self,force=False):
         if not self.enabled:return
         ctx=self.ctx;now=ctx._clock()
