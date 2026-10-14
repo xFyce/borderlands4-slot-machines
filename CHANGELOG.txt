@@ -1,6 +1,17 @@
 Slot Machines - Changelog
 ========================
 
+v1.2
+----
+- Completed the native reward-level audit and fixed additional empty payouts.
+- Heavy ordnance starts at level 10, grenade/knife ordnance and Eridium at
+  level 2, and repkits at level 3. Enhancements remain level 15; class mods 20.
+- Weapon pools now respect their own requirements: assault rifles and
+  shotguns at level 3, sniper rifles at level 5, pistols and SMGs from level 1.
+- The same checks cover legendary/pearl weapons, jackpot loot, configured
+  weapon pools and forced reward tests. Rarity odds and spin prices are unchanged
+  except that Eridium results are unavailable to level-1 characters.
+
 v1.1
 ----
 - Fixed empty gear payouts on low-level characters caused by selecting

@@ -21,8 +21,27 @@ CASH_WEIGHTS = {'cash_small':18,'cash_medium':5,'cash_large':2}
 TYPE_WEIGHTS = {'weapon':50,'classmod':10,'shield':10,'enhancement':10,'repkit':10,'ordnance':5,'heavy':5}
 JACKPOT_EQUIPMENT_WEIGHTS = {'classmod':20,'shield':20,'enhancement':20,'repkit':20,'ordnance':10,'heavy':10}
 JACKPOT_RARITIES = {'epic':80,'legendary':20}
-# BL4 starts dropping these categories only when their equipment slots unlock.
-EQUIPMENT_MIN_LEVEL = {'enhancement':15, 'classmod':20}
+# Audited against the installed native LootSchedule and all 63 reward pools.
+# Pistol/SMG rows have no extra stage gate; playable character levels start at 1.
+EQUIPMENT_MIN_LEVEL = {'ordnance':2, 'repkit':3, 'heavy':10,
+                       'enhancement':15, 'classmod':20, 'eridium':2}
+WEAPON_MIN_LEVEL = {'ps':1, 'sm':1, 'ar':3, 'sg':3, 'sr':5}
+
+
+def pool_minimum(category, name):
+    if category == 'weapon':
+        parts = name.casefold().split('_')
+        if len(parts) < 2 or parts[0] != 'itempool' or parts[1] not in WEAPON_MIN_LEVEL:
+            raise ValueError('Unsupported weapon pool for level checks: '+name)
+        return WEAPON_MIN_LEVEL[parts[1]]
+    return EQUIPMENT_MIN_LEVEL.get(category, 1)
+
+
+def require_pool_level(category, name, level):
+    minimum = pool_minimum(category, name)
+    if level < minimum:
+        raise ValueError(f'{name} rewards unlock at level {minimum}; current level {level}')
+
 
 
 def equipment_weights(level, jackpot=False):

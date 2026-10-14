@@ -76,15 +76,17 @@ class LootRewards:
         self.ensure_catalog()
         return all(name in self.pools for name in PEARL_POOLS)
 
-    def choose(self,rarity):
+    def choose(self,rarity,stage=None):
+        stage=stage if stage is not None else self.game_stage(self.ctx.get_pc(possibly_loading=True))
         if rarity=='pearl':
-            selected=[name for name in PEARL_POOLS if name in self.pools]
+            selected=[name for name in PEARL_POOLS if name in self.pools and stage>=outcomes.pool_minimum('weapon',name)]
             if not selected:raise RuntimeError('No authored pearlescent weapon pools loaded')
             return random.SystemRandom().choice(selected)
         configured=self.ctx._experience.settings['loot_pools'].get(rarity)
         if configured:
             if configured in self.extra_rows:raise RuntimeError('Weapon overrides must name weapon pools; use slots_test RARITY --type CATEGORY for gear tests')
             if configured not in self.pools:raise RuntimeError('Configured pool is not currently loaded: '+configured)
+            outcomes.require_pool_level('weapon',configured,stage)
             return configured
         selected=[]
         for name in self.pools:
@@ -93,6 +95,7 @@ class LootRewards:
             if rarity not in words:continue
             if any(t in text for t in ('mission','quest','boss','dedicated','named','currency','money','ammo','eridium')):continue
             if not any(t in text for t in ('weapon','gun')) and not re.fullmatch(r'itempool_(ar|ps|sg|sm|sr)_\d+_(common|uncommon|rare|epic|legendary)',text):continue
+            if stage<outcomes.pool_minimum('weapon',name):continue
             score=sum(t in text for t in ('world','random','all','generic'))
             selected.append((-score,name))
         if not selected:raise RuntimeError('No unambiguous generic '+rarity+' weapon pool found; check slots_loot_catalog')
@@ -108,17 +111,17 @@ class LootRewards:
         if attempt_receipt is not None:attempt_receipt['native_attempted']=False
         self.catalog()  # Reacquire live store after map changes; no cached native object used.
         if not self.pools:raise RuntimeError('No item-pool rows are loaded; catalog report saved')
-        name=name or self.choose(rarity)
-        if name not in self.pools:raise RuntimeError('Pool is not a catalog row: '+name)
         pc=ctx.get_pc(possibly_loading=True)
         if pc is None or pc.Pawn is None or not ctx._call(pc,'HasAuthority'):raise RuntimeError('Native loot tests require active single-player/host authority')
         stage=stage if stage is not None else self.game_stage(pc)
         if type(stage) is not int or not 1<=stage<=200:raise ValueError('Use an integer item level from 1 to 200')
+        name=name or self.choose(rarity,stage)
+        if name not in self.pools:raise RuntimeError('Pool is not a catalog row: '+name)
+        category=category or self.extra_rows.get(name,{}).get('category','weapon')
+        outcomes.require_pool_level(category,name,stage)
         if ctx._actor is None:raise RuntimeError('Spawn the machine first')
         location=ctx._call(ctx._actor,'K2_GetActorLocation')
         yaw=float(ctx._call(ctx._actor,'K2_GetActorRotation').Yaw)
-        category=category or self.extra_rows.get(name,{}).get('category','weapon')
-        outcomes.require_equipment_level(category,stage)
         route=route_override or self.route(category,name)
         transform,position=self.payout_transform(location,yaw,ctx._model_height,route,category)
         currency_before=self.currency_balance(pc) if category=='eridium' else None
@@ -207,12 +210,12 @@ class LootRewards:
         if pc is None or pc.Pawn is None or not ctx._call(pc,'HasAuthority'):
             raise RuntimeError('Native loot tests require active single-player/host authority')
         self.catalog()
-        name=name or self.choose(rarity)
-        if name not in self.pools:raise RuntimeError('Pool is not a catalog row: '+name)
-        category=self.extra_rows.get(name,{}).get('category',category)
         stage=stage if stage is not None else self.game_stage(pc)
         if type(stage) is not int or not 1<=stage<=200:raise ValueError('Use an integer item level from 1 to 200')
-        outcomes.require_equipment_level(category,stage)
+        name=name or self.choose(rarity,stage)
+        if name not in self.pools:raise RuntimeError('Pool is not a catalog row: '+name)
+        category=self.extra_rows.get(name,{}).get('category',category)
+        outcomes.require_pool_level(category,name,stage)
         receipt={'state':'native spawn queued','rarity':rarity,'pool':name,'game_stage':stage,'category':category,
                  'note':'One free native item request after its payout opening is ready'}
         self.pending={'receipt':receipt,'player':pc,'stage':stage,'pool':name,'rarity':rarity,'category':category,'route':self.route(category,name)}
@@ -238,9 +241,12 @@ class LootRewards:
         if len(matches)!=1:raise RuntimeError('Expected one authored native reward pool: '+wanted)
         return matches[0]
 
-    def eridium_available(self):
+    def eridium_available(self,stage=None):
         self.ensure_catalog()
-        try:self.extra_pool('eridium');return True
+        try:
+            stage=stage if stage is not None else self.game_stage(self.ctx.get_pc(possibly_loading=True))
+            if stage<outcomes.EQUIPMENT_MIN_LEVEL['eridium']:return False
+            self.extra_pool('eridium');return True
         except Exception:return False
 
     def plan(self,outcome,profile,category=None,rng=None):
@@ -270,7 +276,8 @@ class LootRewards:
             specs=[('eridium','common')]*count
         result=[]
         for index,(kind,rarity) in enumerate(specs):
-            name=self.choose(rarity) if kind=='weapon' else self.extra_pool(kind,rarity)
+            name=self.choose(rarity,profile['weapon_stage']) if kind=='weapon' else self.extra_pool(kind,rarity)
+            outcomes.require_pool_level(kind,name,profile['weapon_stage'])
             if name not in self.pools:raise RuntimeError('Prize pool unavailable before wager')
             result.append({'category':kind,'rarity':rarity,'pool':name,'stage':profile['weapon_stage'],
                            'route':'front' if outcome['kind']=='jackpot' and index>0 else self.route(kind,name)})
@@ -287,8 +294,9 @@ class LootRewards:
                 # Legacy diagnostics constructed without a spin-start plan keep
                 # their verified weapon path. Real paid v95 spins always preplan.
                 if outcome['kind']!='weapon':raise RuntimeError('Extra reward has no validated spin-start plan')
-                self.catalog();name=self.choose(outcome['rarity'])
+                self.catalog()
                 stage=active.get('level_sync',{}).get('weapon_stage') or self.game_stage(active['player'])
+                name=self.choose(outcome['rarity'],stage)
                 specs=[{'category':'weapon','rarity':outcome['rarity'],'pool':name,'stage':stage,
                         'route':'front' if name.startswith('itempool_ps_') else 'side'}]
             if not specs:raise RuntimeError('Empty native prize plan')

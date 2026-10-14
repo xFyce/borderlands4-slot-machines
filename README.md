@@ -1,4 +1,4 @@
-# Slot Machines v1.1 — extractor source and build instructions
+# Slot Machines v1.2 — extractor source and build instructions
 
 This is a separate source/review package. Players should install the normal
 Standalone or BL2 Extractor download, following its README.

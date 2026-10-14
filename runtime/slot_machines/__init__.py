@@ -556,7 +556,7 @@ def _spawn_machine_steps(args):
     if not math.isfinite(args.height) or not 100 <= args.height <= 400 or not math.isfinite(args.yaw):
         print("[Slots] Use a finite rotation and height between 100 and 400 cm.")
         return
-    _report = {"version": "1.1.0", "stage": "player"}
+    _report = {"version": "1.2.0", "stage": "player"}
     try:
         while not asset_cache.ready(_ROOT):yield 'waiting for authored data'
         pc = get_pc(possibly_loading=True)
@@ -1763,7 +1763,7 @@ def _start_spin(require_near=False, wager=0, forced_outcome=None, grenade_test=F
                 if _grenade_service().blocked:raise RuntimeError(_grenade_service().blocked)
                 validate(sys.modules[__name__]);grenade_enabled=True
             except Exception as error:_report['paid_grenade_unavailable']=str(error)
-        eridium_enabled=_loot_service().eridium_available() if wager else False
+        eridium_enabled=_loot_service().eridium_available(profile['weapon_stage']) if wager else False
         choices = [3,3,3] if grenade_test else (outcomes.choose(_experience_service().settings['loot_enabled'],forced_outcome,grenade_enabled=grenade_enabled,eridium_enabled=eridium_enabled,
                        pearl_enabled=(_experience_service().settings.get('pearl_enabled',False) or forced_outcome=='pearl') and _loot_service().pearl_available())
                    if wager else [random.SystemRandom().randrange(10) for _ in range(3)])
@@ -1961,7 +1961,7 @@ def _enable():
     except Exception as error:_report['startup_error']=str(error)
 
 
-_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.1.0",
+_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.2.0",
           description="Physical slot machines with paid spins, native BL4 prizes, animated lighting, positional sound and permanent placements.",
           supported_games=Game.BL4, commands=[slots_audio_test, slots_auto_cash, slots_check, slots_collect, slots_diagnostics, slots_edit, slots_help, slots_level, slots_lights, slots_loot_enable, slots_machines, slots_move, slots_odds, slots_pearl_enable, slots_placements, slots_play, slots_remove, slots_rewards, slots_sounds, slots_spawn, slots_status, slots_test, slots_verify, slots_wallet],
           keybinds=[interact_slot_machine,collect_slot_winnings], hooks=[_character_loaded,_world_end_play], on_enable=_enable, on_disable=_disable)
