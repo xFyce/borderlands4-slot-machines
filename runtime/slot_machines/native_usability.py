@@ -1,4 +1,4 @@
-"""Opt-in native dynamic GbxUseTrigger targets; never modifies authored definitions."""
+"""Recoverable native GbxUseTrigger targets; never modifies authored definitions."""
 import math
 import unrealsdk
 from unrealsdk.hooks import Block
@@ -9,12 +9,16 @@ class NativeUsability:
     def __init__(self,ctx):
         self.ctx=ctx;self.nodes={};self.session=None;self.enabled=False
         self.hooked=False;self.next_tick=0;self.native_machine_use=False
+        self.wanted=False;self.retry_at=0;self.was_near=False
     def report(self,**values):
         self.ctx._report.setdefault('native_usability',{}).update(values)
     def resolve(self,path):
         try:return unrealsdk.find_object('Actor',path)
         except Exception:return None
-    def clear(self):
+    def clear(self,retry=False):
+        # Explicit removal stays off; transient loading failures retry later.
+        self.wanted=bool(retry);self.retry_at=self.ctx._clock()+2 if retry else 0
+        self.was_near=False
         self.enabled=False;self.native_machine_use=False
         if self.hooked:
             from .fleet import manager
@@ -105,7 +109,7 @@ class NativeUsability:
         scale=ctx._model_height/180;angle=math.radians(yaw)
         return (float(p.X)+25*scale*math.cos(angle),float(p.Y)+25*scale*math.sin(angle),float(p.Z)+85*scale)
     def start(self):
-        self.clear();ctx=self.ctx;pc=ctx.get_pc(possibly_loading=True)
+        self.clear(retry=True);ctx=self.ctx;pc=ctx.get_pc(possibly_loading=True)
         if ctx._actor is None or pc is None or pc.Pawn is None:raise RuntimeError('Run slots_spawn in-game first')
         cls=unrealsdk.find_class('/Script/GbxGame.GbxUseTrigger')
         fields={str(p.Name):type(p).__name__ for p in cls._properties()}
@@ -124,10 +128,37 @@ class NativeUsability:
             from .fleet import manager
             manager(ctx).attach_native(self)
             self.hooked=True;self.enabled=True;self.next_tick=0
-            self.report(state='native target prototype active',label='Native authored Use/Take prompts; custom price/amount labels pending',paths={k:n['path'] for k,n in self.nodes.items()})
+            self.report(state='native targets active',label='Native authored Use/Take prompts',paths={k:n['path'] for k,n in self.nodes.items()})
             self.tick(force=True)
         except Exception:
-            self.clear();raise
+            self.clear(retry=True);raise
+    def recover(self,now):
+        if not self.wanted:return
+        if not self.enabled:
+            if now<self.retry_at:return
+            try:
+                self.start()
+                if self.enabled:
+                    count=self.ctx._report.get('native_usability',{}).get('recoveries',0)
+                    self.report(recoveries=count+1)
+            except Exception as error:
+                self.retry_at=now+2
+                self.report(state='retry pending; custom prompt available',error=str(error))
+            return
+        self.tick(force=True)
+        if not self.enabled:return
+        # Re-register on approach in case focus was initialized before the HUD.
+        # No periodic respawns and no changes to an in-progress spin or payout.
+        try:
+            near=self.ctx._near_machine()
+            if near and not self.was_near:
+                for node in self.nodes.values():
+                    if node['active']:
+                        actor=self.resolve(node['path'])
+                        if actor is not None:self.refresh(actor)
+            self.was_near=near
+        except Exception as error:
+            self.clear(retry=True);self.report(state='retry pending',error=str(error))
     def set_active(self,kind,active,position=None):
         node=self.nodes[kind];actor=self.resolve(node['path'])
         if actor is None:raise RuntimeError('Owned native use target no longer exists')
@@ -136,9 +167,13 @@ class NativeUsability:
             moved=ctx._call(actor,'K2_SetActorLocation',NewLocation=ctx._vec(*position),bSweep=False,bTeleport=True)
             if moved is False:raise RuntimeError('Native cash target could not move to the stack')
             node['position']=tuple(position)
-        if node['active']!=active:
+        # Read the actual native flags, rather than trusting a Python cache
+        # after loading, menu changes or the game disabling an interaction.
+        if (node['active']!=active or bool(actor.bPrimaryUsabilityEnabled)!=bool(active)
+                or bool(getattr(actor,'bActorEnableCollision',active))!=bool(active)):
             actor.bPrimaryUsabilityEnabled=bool(active)
             ctx._call(actor,'SetActorEnableCollision',bNewActorEnableCollision=bool(active))
+            self.refresh(actor)
             node['active']=bool(active)
             self.report(target_states={k:n['active'] for k,n in self.nodes.items()})
     def tick(self,force=False):
@@ -146,11 +181,11 @@ class NativeUsability:
         ctx=self.ctx;now=ctx._clock()
         if not force and now<self.next_tick:return
         self.next_tick=now+.1
-        pc=ctx.get_pc(possibly_loading=True)
-        current=(ctx._path(ctx._actor),ctx._path(pc),ctx._path(getattr(pc,'Pawn',None)))
-        if current!=self.session:
-            self.clear();self.report(state='cancelled after machine/player change');return
         try:
+            pc=ctx.get_pc(possibly_loading=True)
+            current=(ctx._path(ctx._actor),ctx._path(pc),ctx._path(getattr(pc,'Pawn',None)))
+            if current!=self.session:
+                self.clear(retry=True);self.report(state='waiting for current machine/player');return
             if getattr(ctx,'_editing',False):
                 self.set_active('cash',False)
                 self.set_active('machine',False)
@@ -171,7 +206,7 @@ class NativeUsability:
             machine_ready=not menu and not busy and not waiting and (tray is None or tray['state']=='closed') and (door is None or door['state']=='closed')
             self.set_active('machine',bool(machine_ready))
         except Exception as error:
-            self.clear();self.report(state='unavailable; custom prompt restored',error=str(error))
+            self.clear(retry=True);self.report(state='retry pending; custom prompt restored',error=str(error))
     def used(self,obj,args,ret,fn):
         # Never intercept a native weapon, vendor, NPC, or another player's use.
         if not self.enabled:return None

@@ -39,6 +39,7 @@ class Fleet:
         from .streaming import Resources
         self.resources = Resources()
         self.loading = None
+        self.next_interaction_check = 0
 
     def sync_session(self):
         # Only inspect the CURRENT controller and pawn supplied by mods_base.
@@ -291,6 +292,18 @@ class Fleet:
             if obj == ctx._actor or (pickups is not None and any(r['actor'] == obj for r in pickups.records)):
                 return experience.tick(obj, args, ret, fn)
         return None
+
+    def recover_interactions(self,now):
+        # Runs from the controller's independent startup timer, so a lost
+        # cabinet timer cannot also prevent its own repair. No actor scans.
+        if now<self.next_interaction_check:return
+        self.next_interaction_check=now+1
+        for ctx in tuple(self.instances):
+            if ctx._actor is None or getattr(ctx,'_building',False):continue
+            # Service deadlines use Unreal's game clock; `now` here is the
+            # startup dispatcher's monotonic clock and only throttles this loop.
+            try:ctx._experience_service().recover(ctx._clock())
+            except Exception as error:ctx._report['interaction_recovery_error']=str(error)
 
     def animate(self, obj, args, ret, fn):
         if not self.sync_session():return None

@@ -31,6 +31,7 @@ class Experience:
         self.last_use=-100
         self.in_poll=False
         self.ui_failed=False
+        self.last_tick=0;self.hud_retry_at=0
         migrate_pearls=False
         try:
             loaded=json.loads((self.folder/'slot_settings.json').read_text(encoding='utf-8'))
@@ -92,21 +93,50 @@ class Experience:
         self.stop()
         self.ui_failed=False;self.key_down=False;self.next_slow_tick=0
         self.native_overlay_hidden=False
+        self.arm_timer()
+        try:self.setup_hud()
+        except Exception as error:
+            self.ui_failed=True
+            self.hud_retry_at=ctx._clock()+5
+            ctx._report['interaction_prompt_error']=str(error)
+            if self.overlay is not None:
+                try:ctx._call(self.overlay,'RemoveFromParent')
+                except Exception:pass
+            self.overlay=None;self.widgets=[];self.text=None
+        ctx._report['settings']=dict(self.settings)
+
+    def arm_timer(self):
+        ctx=self.ctx
         from .fleet import manager
         manager(ctx).attach_experience(self)
         self.hooked=True
         ctx._call(ctx._default('/Script/Engine.Default__KismetSystemLibrary'),'K2_SetTimer',
                   Object=ctx._actor,FunctionName='FlushNetDormancy',Time=.001,bLooping=True,
                   bMaxOncePerFrame=True,InitialStartDelay=.001,InitialStartDelayVariance=0)
-        try:self.setup_hud()
-        except Exception as error:
-            self.ui_failed=True
-            ctx._report['interaction_prompt_error']=str(error)
+        self.last_tick=ctx._clock()
+
+    def recover(self,now):
+        ctx=self.ctx
+        if not self.hooked or now-self.last_tick>2:
+            self.arm_timer()
+            info=ctx._report.setdefault('interaction_input',{})
+            info['timer_restarts']=info.get('timer_restarts',0)+1
+        native=getattr(ctx,'_native_ui',None)
+        if native is None:
+            from .native_usability import NativeUsability
+            native=NativeUsability(ctx);native.wanted=True;ctx._native_ui=native
+        native.recover(now)
+        if not native.enabled and self.text is None and now>=self.hud_retry_at:
+            self.hud_retry_at=now+5
             if self.overlay is not None:
                 try:ctx._call(self.overlay,'RemoveFromParent')
                 except Exception:pass
-            self.text=None
-        ctx._report['settings']=dict(self.settings)
+            self.overlay=None;self.widgets=[];self.last_text=None
+            try:
+                self.setup_hud();self.ui_failed=False;self.native_overlay_hidden=False
+            except Exception as error:
+                self.text=None;self.ui_failed=True
+                ctx._report['interaction_prompt_error']=str(error)
 
     def setup_hud(self):
         ctx=self.ctx
@@ -192,6 +222,7 @@ class Experience:
         if pickups is not None and any(r['actor']==obj for r in pickups.records):
             return pickups.tick(obj,args,ret,fn)
         if ctx._actor is None or obj!=ctx._actor:return None
+        self.last_tick=ctx._clock()
         try:
             getattr(ctx,'_native_trace',_NO_TRACE).phase('interaction timer')
             now=ctx._clock()

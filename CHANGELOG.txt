@@ -3,6 +3,9 @@ Slot Machines - Changelog
 
 v1.2
 ----
+- Added automatic recovery for missing interaction prompts and machines
+  ignoring E after loading: retry failed setup, restore native interaction
+  state and restart a stopped cabinet update timer.
 - Completed the native reward-level audit and fixed additional empty payouts.
 - Heavy ordnance starts at level 10, grenade/knife ordnance and Eridium at
   level 2, and repkits at level 3. Enhancements remain level 15; class mods 20.
