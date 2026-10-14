@@ -1916,8 +1916,8 @@ def _startup_tick(obj,args,ret,fn):
     if _boot_ready_at and time.monotonic()>=_boot_ready_at:
         _boot_ready_at=0
     if not _boot_ready_at:
-        fleet.advance_loading()
         fleet.recover_interactions(now)
+        fleet.advance_loading()
         from .placement_editor import service as editor_service
         try:editor_service(sys.modules[__name__]).tick(fleet)
         except Exception as error:_report['placement_editor_error']=str(error)

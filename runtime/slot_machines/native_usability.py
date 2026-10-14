@@ -4,6 +4,7 @@ import unrealsdk
 from unrealsdk.hooks import Block
 
 FUNCTION='/Script/OakGame.OakPlayerController:ServerUseObject'
+OWNED_TAG='BL4Slots.UseTarget'
 
 class NativeUsability:
     def __init__(self,ctx):
@@ -85,6 +86,7 @@ class NativeUsability:
                        TransformScaleMethod=0,optional=('TransformScaleMethod',))
         if actor is None:raise RuntimeError('Native usability actor spawn returned None')
         self.nodes[kind]={'path':ctx._path(actor),'active':None,'position':tuple(position)}
+        actor.Tags=[OWNED_TAG]
         self.configure(actor,kind)
         root=actor.RootComponent
         if root is None:raise RuntimeError('Native use trigger sphere root missing')

@@ -3,6 +3,7 @@ Slot Machines - Changelog
 
 v1.2
 ----
+- Clean up leftover machine Use targets after fast travel or area reloads.
 - Remove the machine Use interaction while a payout is waiting, so it
   cannot cover the item inspection and pickup prompt.
 - Added automatic recovery for missing interaction prompts and machines

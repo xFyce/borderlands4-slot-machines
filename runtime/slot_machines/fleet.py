@@ -40,6 +40,7 @@ class Fleet:
         self.resources = Resources()
         self.loading = None
         self.next_interaction_check = 0
+        self.retired_use_paths = set()
 
     def sync_session(self):
         # Only inspect the CURRENT controller and pawn supplied by mods_base.
@@ -63,10 +64,21 @@ class Fleet:
         # Unregister Python dispatchers, then discard wrappers. Calling normal
         # remove/clear here can enter freed native memory; try/except cannot
         # protect against that access violation.
+        # Keep only owned path STRINGS for deferred cleanup. A pawn reset in
+        # the same persistent world can leave its separate Use actors alive.
+        for ctx in tuple(self.instances):
+            target=getattr(ctx,'_native_ui',None)
+            if target is not None:
+                self.retired_use_paths.update(node['path'] for node in target.nodes.values())
+        self.next_interaction_check=0
         editor=getattr(self.root,'_placement_editor',None)
         if editor is not None:editor.abandon()
         placements=getattr(self.root,'_placements',None)
-        if placements is not None:placements.cancel_search()
+        if placements is not None:
+            placements.cancel_search()
+            # Streaming EndPlay can reset cabinets without replacing the pawn.
+            # Force placement bookkeeping to retire its old actor paths too.
+            placements.session=None
         if self.loading is not None:
             self.loading.cancel()
             self.loading.target._fleet_local=False
@@ -298,12 +310,42 @@ class Fleet:
         # cabinet timer cannot also prevent its own repair. No actor scans.
         if now<self.next_interaction_check:return
         self.next_interaction_check=now+1
+        self.cleanup_retired_interactions()
         for ctx in tuple(self.instances):
             if ctx._actor is None or getattr(ctx,'_building',False):continue
             # Service deadlines use Unreal's game clock; `now` here is the
             # startup dispatcher's monotonic clock and only throttles this loop.
             try:ctx._experience_service().recover(ctx._clock())
             except Exception as error:ctx._report['interaction_recovery_error']=str(error)
+
+    def cleanup_retired_interactions(self):
+        if not self.retired_use_paths:return
+        pc=self.root.get_pc(possibly_loading=True)
+        pawn=getattr(pc,'Pawn',None) if pc is not None else None
+        if pawn is None:return
+        world=self.root._path(pawn).split(':',1)[0]
+        from .native_usability import OWNED_TAG
+        import unrealsdk
+        info=self.root._report.setdefault('retired_use_cleanup',{'removed':0})
+        for path in tuple(self.retired_use_paths):
+            # Another map's actors are gone; never look them up or dereference
+            # retained wrappers. Only touch freshly resolved, tagged mod actors.
+            if path.split(':',1)[0]!=world:
+                self.retired_use_paths.discard(path);continue
+            try:
+                try:actor=unrealsdk.find_object('Actor',path)
+                except ValueError:actor=None
+                if actor is not None and OWNED_TAG in [str(t) for t in actor.Tags]:
+                    actor.UsableActorState.ReplicatedDynamicInteractions=[]
+                    actor.bPrimaryUsabilityEnabled=False
+                    self.root._call(actor,'SetActorEnableCollision',bNewActorEnableCollision=False)
+                    if self.root._call(actor,'K2_DestroyActor') is False:
+                        raise RuntimeError('Retired interaction target could not be removed')
+                    info['removed']+=1
+                self.retired_use_paths.discard(path)
+            except Exception as error:
+                info['error']=str(error)
+        info['pending']=len(self.retired_use_paths)
 
     def animate(self, obj, args, ret, fn):
         if not self.sync_session():return None
