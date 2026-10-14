@@ -1,7 +1,7 @@
 Slot Machines - Changelog
 ========================
 
-v1.2
+v1.3
 ----
 - Clean up leftover machine Use targets after fast travel or area reloads.
 - Remove the machine Use interaction while a payout is waiting, so it
@@ -9,6 +9,12 @@ v1.2
 - Added automatic recovery for missing interaction prompts and machines
   ignoring E after loading: retry failed setup, restore native interaction
   state and restart a stopped cabinet update timer.
+- Reuse retained textures and lighting across same-world travel, and
+  spread material setup into smaller loading steps. Visual quality
+  and lighting timing are unchanged; initial native imports may hitch.
+
+v1.2
+----
 - Completed the native reward-level audit and fixed additional empty payouts.
 - Heavy ordnance starts at level 10, grenade/knife ordnance and Eridium at
   level 2, and repkits at level 3. Enhancements remain level 15; class mods 20.

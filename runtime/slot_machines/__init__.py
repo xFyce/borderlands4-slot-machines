@@ -15,7 +15,7 @@ from .crash_trace import CrashTrace
 from . import outcomes, diagnostics
 from .asset_cache import load_json
 from . import asset_cache
-from .streaming import resources as loading_resources, texture as shared_texture
+from .streaming import resources as loading_resources, texture as shared_texture, retain_material as retain_shared_material
 
 import unrealsdk
 from mods_base import Game, build_mod, command, get_pc, hook, keybind
@@ -91,7 +91,7 @@ def _call(obj, name, optional=(), **values):
             raise RuntimeError(f"{name}: missing parameter {key}; available: {list(names.values())}")
         setattr(params, actual, value)
     _native_trace.record('invoke '+name)
-    measured=name in ('SpawnInventoryFromItemPool','BeginDeferredActorSpawnFromClass','FinishSpawningActor','AddComponentByClass','OpenFile')
+    measured=name in ('ImportFileAsTexture2D','CreateDynamicMaterialInstance','SpawnInventoryFromItemPool','BeginDeferredActorSpawnFromClass','FinishSpawningActor','AddComponentByClass','OpenFile')
     before_call=time.perf_counter() if measured else 0
     result = fn(params) if values else fn()
     if measured:
@@ -329,7 +329,7 @@ def _texture_metadata(texture):
     return record
 
 
-def _neutral_surface(pc, rendering, dynamic, material):
+def _neutral_surface_steps(pc, rendering, dynamic, material):
     textures, scalars, vectors = _material_parameters(material)
     _report["source_texture_bindings"] = [
         {**_info_record(info), "owner": owner, "texture": _texture_metadata(value)}
@@ -340,6 +340,7 @@ def _neutral_surface(pc, rendering, dynamic, material):
         "scalars": {name: str(value) for name, value in scalars.items()},
         "vectors": {name: str(value) for name, value in vectors.items()},
     }
+    yield 'surface parameter profile'
     maps = {}
     changes = []
     errors = []
@@ -354,8 +355,7 @@ def _neutral_surface(pc, rendering, dynamic, material):
                         result = candidate
                         break
             if result is None:
-                result = _call(rendering, "ImportFileAsTexture2D", WorldContextObject=pc,
-                               Filename=str(_ROOT / filename))
+                result = shared_texture(sys.modules[__name__],pc,filename)
                 if result is None:
                     raise RuntimeError("Could not load " + filename)
                 if filename != "Preview_White.png" and filename != "Preview_Black.png":
@@ -395,6 +395,7 @@ def _neutral_surface(pc, rendering, dynamic, material):
                 changes.append({"parameter": name, "map": filename})
             except Exception as error:
                 errors.append(name + ": " + str(error))
+        yield 'surface texture binding'
     for name in scalars:
         key = name.lower().replace("_", "").replace(" ", "")
         value = None
@@ -412,6 +413,7 @@ def _neutral_surface(pc, rendering, dynamic, material):
                 changes.append({"parameter": name, "scalar": value})
             except Exception as error:
                 errors.append(name + ": " + str(error))
+        yield 'surface scalar binding'
     for name in vectors:
         if name.lower().replace("_", "").replace(" ", "") == "emissivecolor":
             try:
@@ -420,8 +422,12 @@ def _neutral_surface(pc, rendering, dynamic, material):
                 changes.append({"parameter": name, "vector": "black"})
             except Exception as error:
                 errors.append(name + ": " + str(error))
+        yield 'surface vector binding'
     _report["surface_changes"] = changes
     _report["surface_errors"] = errors
+
+def _neutral_surface(pc, rendering, dynamic, material):
+    for _ in _neutral_surface_steps(pc,rendering,dynamic,material):pass
 
 
 def _texture_material_steps(pc, component, selection=0, list_only=False):
@@ -486,10 +492,6 @@ def _texture_material_steps(pc, component, selection=0, list_only=False):
         _report["texture_status"] = "No compatible loaded diffuse material; default gray preview."
         return False
     rendering = _default("/Script/Engine.Default__KismetRenderingLibrary")
-    texture = shared_texture(sys.modules[__name__],pc,
-                    {"4x": "SlotMachine_Dif_4x.png", "original": "SlotMachine_Dif.png"}[_texture_variant])
-    if texture is None:
-        raise RuntimeError("ImportFileAsTexture2D returned no texture")
     for score, path, name, material_path in (ranked[selection:] if selection==0 else ranked[selection:selection+1]):
         try:
             material=unrealsdk.find_object('MaterialInstanceConstant',material_path)
@@ -499,15 +501,21 @@ def _texture_material_steps(pc, component, selection=0, list_only=False):
                             optional=("OptionalName",))
             if dynamic is None:
                 continue
+            # The component retains the new MID/source before a frame boundary.
+            yield 'body material instance'
+            texture = shared_texture(sys.modules[__name__],pc,
+                {"4x": "SlotMachine_Dif_4x.png", "original": "SlotMachine_Dif.png"}[_texture_variant])
             _report["parameter_writes"] = []
             _set_parameter(dynamic, material, "Texture", name, texture)
             _keepalive.extend((texture, dynamic))
             if selection==0:cache.body_material=(score,path,name)
-            yield 'body texture and material'
-            _neutral_surface(pc, rendering, dynamic, material)
+            retain_shared_material(sys.modules[__name__],pc,dynamic,(str(_ROOT),'body',_texture_variant))
+            yield 'body diffuse texture'
+            yield from _neutral_surface_steps(pc, rendering, dynamic, material)
             for part in _parts.values():
                 if part is not component:
                     _call(part, "SetMaterial", ElementIndex=0, Material=dynamic)
+                    yield 'body section material'
             _report["material"] = {"source": path, "diffuse_parameter": name, "score": score, "index": selection}
             try:
                 _report["texture_variant"] = _texture_variant
@@ -556,7 +564,7 @@ def _spawn_machine_steps(args):
     if not math.isfinite(args.height) or not 100 <= args.height <= 400 or not math.isfinite(args.yaw):
         print("[Slots] Use a finite rotation and height between 100 and 400 cm.")
         return
-    _report = {"version": "1.2.0", "stage": "player"}
+    _report = {"version": "1.3.0", "stage": "player"}
     try:
         while not asset_cache.ready(_ROOT):yield 'waiting for authored data'
         pc = get_pc(possibly_loading=True)
@@ -1844,7 +1852,7 @@ def _disable():
     if pc is not None and _boot_pc_path is not None and _path(pc)==_boot_pc_path:
         _call(_default('/Script/Engine.Default__KismetSystemLibrary'),'K2_ClearTimer',Object=pc,FunctionName='ForceNetUpdate')
     from .fleet import manager
-    manager(sys.modules[__name__]).clear()
+    fleet=manager(sys.modules[__name__]);fleet.clear();fleet.release_resources()
     if _compass is not None:
         _compass.stop()
     from .timer_bus import unsubscribe
@@ -1962,7 +1970,7 @@ def _enable():
     except Exception as error:_report['startup_error']=str(error)
 
 
-_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.2.0",
+_mod = build_mod(name="Slot Machines", author="Fyce / Codex", version="1.3.0",
           description="Physical slot machines with paid spins, native BL4 prizes, animated lighting, positional sound and permanent placements.",
           supported_games=Game.BL4, commands=[slots_audio_test, slots_auto_cash, slots_check, slots_collect, slots_diagnostics, slots_edit, slots_help, slots_level, slots_lights, slots_loot_enable, slots_machines, slots_move, slots_odds, slots_pearl_enable, slots_placements, slots_play, slots_remove, slots_rewards, slots_sounds, slots_spawn, slots_status, slots_test, slots_verify, slots_wallet],
           keybinds=[interact_slot_machine,collect_slot_winnings], hooks=[_character_loaded,_world_end_play], on_enable=_enable, on_disable=_disable)

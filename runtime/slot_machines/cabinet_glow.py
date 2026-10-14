@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 import unrealsdk
 from .asset_cache import load_json
-from .streaming import resources, section_steps, texture as shared_texture
+from .streaming import resources, section_steps, texture as shared_texture, retain_material as retain_shared_material
 
 SOURCE='/Game/World/Order/Architecture/Pipeline/MI_Pipeline_Emissive.MI_Pipeline_Emissive'
 FRAME_COUNT=120
@@ -111,12 +111,15 @@ class CabinetGlowBase:
                                   OptionalName='BL2OriginalMask143Frame'+str(frame),optional=('OptionalName',))
                     if mid is None:raise RuntimeError('Prepared light material creation failed')
                     ctx._call(anchor,'SetMaterial',ElementIndex=frame+1,Material=mid)
+                    yield 'light material instance'
                     # Each texture is bound/retained before the next staged yield.
                     body=shared_texture(ctx,pc,'lights143/base.png')
                     ctx._set_parameter(mid,source,'Texture','BaseColor',body)
                     ctx._set_parameter(mid,source,'Texture','Mask',white)
+                    yield 'light base bindings'
                     emission=shared_texture(ctx,pc,'lights143/frame_'+f'{frame:02}.png')
                     ctx._set_parameter(mid,source,'Texture','T_Emissive',emission)
+                    yield 'light emissive texture'
                     ctx._set_parameter(mid,source,'Vector','EmissiveColor',unrealsdk.make_struct('LinearColor',R=1,G=1,B=1,A=1))
                     ctx._set_parameter(mid,source,'Scalar','UVCoordinates',0.0)
                     controls={'emissiveintensity':profile['intensity'],'eyeadaptationcontrolamount':0.0,
@@ -130,6 +133,7 @@ class CabinetGlowBase:
                 ctx._call(anchor,'SetMaterial',ElementIndex=frame+1,Material=mid)
                 if ctx._call(anchor,'GetMaterial',ElementIndex=frame+1)!=mid:
                     raise RuntimeError('Native light-frame material was not retained')
+                retain_shared_material(ctx,pc,mid,(str(ctx._ROOT),'light',frame))
                 retained.append(ctx._path(mid))
                 yield 'retained original-mask frame'
             cache.mask_light_materials[cache_key]=retained

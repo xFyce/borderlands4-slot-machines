@@ -51,6 +51,12 @@ class Fleet:
         if self.session is not None and current!=self.session:
             self.abandon_world()
         self.session=current
+        if current is not None:
+            world=current[1].split(':',1)[0]
+            if self.resources.world not in (None,world):
+                from .streaming import Resources
+                self.resources=Resources()
+            self.resources.world=world
         return current is not None
 
     def remember_actor(self,ctx):
@@ -83,8 +89,9 @@ class Fleet:
             self.loading.cancel()
             self.loading.target._fleet_local=False
             self.loading=None
-        from .streaming import Resources
-        self.resources=Resources()
+        # Caches hold only object names and independent value arrays. Retain
+        # them until the current world is known; same-world pawn travel can
+        # reuse the hidden resource anchor. New worlds replace them in sync.
         for function,registered,kind,name in (
                 (FLUSH,self.flush_registered,Type.PRE,FLUSH_HOOK),
                 (USE,self.use_registered,Type.PRE,USE_HOOK),
@@ -371,6 +378,13 @@ class Fleet:
         self.sync_session()
         for target in tuple(self.instances):
             self.remove(target)
+
+    def release_resources(self):
+        if self.sync_session():
+            from .streaming import release_retained_materials
+            release_retained_materials(self.root)
+        from .streaming import Resources
+        self.resources=Resources()
 
     def describe(self):
         for target in self.instances:

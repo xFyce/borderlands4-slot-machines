@@ -6,6 +6,7 @@ from pathlib import Path
 
 BUDGET_SECONDS = .002
 MAX_STEPS = 8
+RESOURCE_TAG = 'BL4Slots.ResourceAnchor'
 
 
 class Resources:
@@ -16,6 +17,12 @@ class Resources:
         self.imports = 0
         self.texture_hits = 0
         self.mesh_hits = 0
+        self.world = None
+        self.anchor_actor = None
+        self.anchor_component = None
+        self.retained_slots = {}
+        self.retained_paths = {}
+        self.retention_retry_at = 0
 
 
 def resources(ctx):
@@ -46,6 +53,69 @@ def texture(ctx, pc, filename):
     cache.textures[key] = ctx._path(result)
     cache.imports += 1
     return result
+
+
+def retain_material(ctx, pc, material, key):
+    """Native material references keep imports alive across same-world travel.
+
+    Python caches contain only names and value arrays. A hidden, non-colliding
+    world actor owns the references; it renders no mesh and owns no Use target.
+    Failure is optional: ordinary cabinet-owned materials still render normally.
+    """
+    import unrealsdk
+    cache=resources(ctx)
+    if time.monotonic()<cache.retention_retry_at:return False
+    try:
+        part=unrealsdk.find_object('Object',cache.anchor_component) if cache.anchor_component else None
+    except ValueError:part=None
+    try:
+        if part is None:
+            release_retained_materials(ctx)
+            gs=ctx._default('/Script/Engine.Default__GameplayStatics')
+            transform=ctx._transform()
+            actor=ctx._call(gs,'BeginDeferredActorSpawnFromClass',WorldContextObject=pc,
+                ActorClass=unrealsdk.find_class('/Script/Engine.Actor'),SpawnTransform=transform,
+                CollisionHandlingOverride=1,Owner=pc,TransformScaleMethod=0,optional=('TransformScaleMethod',))
+            if actor is None:raise RuntimeError('Resource anchor spawn failed')
+            cache.anchor_actor=ctx._path(actor)
+            actor.Tags=[RESOURCE_TAG]
+            ctx._call(actor,'SetActorHiddenInGame',bNewHidden=True)
+            ctx._call(actor,'SetActorEnableCollision',bNewActorEnableCollision=False)
+            actor=ctx._call(gs,'FinishSpawningActor',Actor=actor,SpawnTransform=transform,
+                           TransformScaleMethod=0,optional=('TransformScaleMethod',))
+            if actor is None:raise RuntimeError('Resource anchor finish failed')
+            part=ctx._call(actor,'AddComponentByClass',
+                Class=unrealsdk.find_class('/Script/ProceduralMeshComponent.ProceduralMeshComponent'),
+                bManualAttachment=False,RelativeTransform=transform,bDeferredFinish=False)
+            if part is None:raise RuntimeError('Resource anchor component failed')
+            cache.anchor_component=ctx._path(part)
+            ctx._call(part,'SetCollisionEnabled',NewType=0)
+            ctx._call(part,'SetVisibility',bNewVisibility=False,bPropagateToChildren=False)
+        path=ctx._path(material)
+        if cache.retained_paths.get(key)!=path:
+            slot=cache.retained_slots.setdefault(key,len(cache.retained_slots))
+            ctx._call(part,'SetMaterial',ElementIndex=slot,Material=material)
+            if ctx._call(part,'GetMaterial',ElementIndex=slot)!=material:
+                raise RuntimeError('Resource material reference was not retained')
+            cache.retained_paths[key]=path
+        return True
+    except Exception as error:
+        cache.retention_retry_at=time.monotonic()+5
+        ctx._report['resource_retention_note']=str(error)
+        return False
+
+
+def release_retained_materials(ctx):
+    import unrealsdk
+    cache=resources(ctx)
+    path,cache.anchor_actor=cache.anchor_actor,None
+    cache.anchor_component=None;cache.retained_slots.clear();cache.retained_paths.clear()
+    if not path:return
+    try:
+        actor=unrealsdk.find_object('Actor',path)
+        if actor is not None and RESOURCE_TAG in [str(t) for t in actor.Tags]:
+            ctx._call(actor,'K2_DestroyActor')
+    except (ValueError,RuntimeError):pass
 
 
 def section_steps(ctx, part, index, mesh, offset, cache_key=None, label='light mesh section'):
@@ -133,10 +203,10 @@ def report(fleet, job, error=None):
         metrics['error'] = str(error)
     job.target._report['streaming_load'] = metrics
     cache = fleet.resources
-    payload = dict(version='0.141.0', machine=job.target._path(job.target._actor),
+    payload = dict(version='1.3.0', machine=job.target._path(job.target._actor),
                    loading=metrics, texture_imports=cache.imports,
                    shared_texture_reuses=cache.texture_hits,
-                   shared_mesh_reuses=cache.mesh_hits,
+                   shared_mesh_reuses=cache.mesh_hits,retained_materials=len(cache.retained_paths),
                    visual_and_stutter_confirmation='requires in-game check')
     fleet.root._report['streaming_load'] = payload
     from . import diagnostics
