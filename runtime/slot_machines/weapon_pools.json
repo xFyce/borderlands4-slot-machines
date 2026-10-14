@@ -1,0 +1,182 @@
+[
+  {
+    "display_name": "itempool_ar_01_common",
+    "itempool": "itempool_ar_01_common",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ar_02_uncommon",
+    "itempool": "itempool_ar_02_uncommon",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ar_03_rare",
+    "itempool": "itempool_ar_03_rare",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ar_04_epic",
+    "itempool": "itempool_ar_04_epic",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ar_05_legendary",
+    "itempool": "itempool_ar_05_legendary",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_01_common",
+    "itempool": "itempool_ps_01_common",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_02_uncommon",
+    "itempool": "itempool_ps_02_uncommon",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_03_rare",
+    "itempool": "itempool_ps_03_rare",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_04_epic",
+    "itempool": "itempool_ps_04_epic",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_05_legendary",
+    "itempool": "itempool_ps_05_legendary",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_01_common",
+    "itempool": "itempool_sg_01_common",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_02_uncommon",
+    "itempool": "itempool_sg_02_uncommon",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_03_rare",
+    "itempool": "itempool_sg_03_rare",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_04_epic",
+    "itempool": "itempool_sg_04_epic",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_05_legendary",
+    "itempool": "itempool_sg_05_legendary",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_01_common",
+    "itempool": "itempool_sm_01_common",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_02_uncommon",
+    "itempool": "itempool_sm_02_uncommon",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_03_rare",
+    "itempool": "itempool_sm_03_rare",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_04_epic",
+    "itempool": "itempool_sm_04_epic",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_05_legendary",
+    "itempool": "itempool_sm_05_legendary",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_01_common",
+    "itempool": "itempool_sr_01_common",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_02_uncommon",
+    "itempool": "itempool_sr_02_uncommon",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_03_rare",
+    "itempool": "itempool_sr_03_rare",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_04_epic",
+    "itempool": "itempool_sr_04_epic",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_05_legendary",
+    "itempool": "itempool_sr_05_legendary",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ar_06_pearl",
+    "itempool": "itempool_ar_06_pearl",
+    "category": "ar",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_ps_06_pearl",
+    "itempool": "itempool_ps_06_pearl",
+    "category": "ps",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sg_06_pearl",
+    "itempool": "itempool_sg_06_pearl",
+    "category": "sg",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sm_06_pearl",
+    "itempool": "itempool_sm_06_pearl",
+    "category": "sm",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  },
+  {
+    "display_name": "itempool_sr_06_pearl",
+    "itempool": "itempool_sr_06_pearl",
+    "category": "sr",
+    "source_archive": "pakchunk0-Windows_20_P.pak"
+  }
+]

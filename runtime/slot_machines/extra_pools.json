@@ -1,0 +1,2038 @@
+[
+  {
+    "itempool": "itempool_class_mods_01_common",
+    "key": "itempool_class_mods_01_common",
+    "category": "classmod",
+    "rarity": "common",
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_dark_siren.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_exo_soldier.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_gravitar.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_paladin.comp_01_common'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_class_mods_01_common"
+    }
+  },
+  {
+    "itempool": "itempool_class_mods_02_uncommon",
+    "key": "itempool_class_mods_02_uncommon",
+    "category": "classmod",
+    "rarity": "uncommon",
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_class_mods_02_uncommon",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_dark_siren.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_exo_soldier.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_gravitar.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_paladin.comp_02_uncommon'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_class_mods_03_rare",
+    "key": "itempool_class_mods_03_rare",
+    "category": "classmod",
+    "rarity": "rare",
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_dark_siren.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_exo_soldier.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_gravitar.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_paladin.comp_03_rare'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_class_mods_03_rare"
+    }
+  },
+  {
+    "itempool": "itempool_class_mods_04_epic",
+    "key": "itempool_class_mods_04_epic",
+    "category": "classmod",
+    "rarity": "epic",
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_dark_siren.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_exo_soldier.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_gravitar.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'classmod_paladin.comp_04_epic'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_class_mods_04_epic"
+    }
+  },
+  {
+    "itempool": "itempool_class_mods_05_legendary",
+    "key": "itempool_class_mods_05_legendary",
+    "category": "classmod",
+    "rarity": "legendary",
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_class_mods_05_legendary",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "itempool'itempool_class_mods_05_legendary_dark_siren'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "itempool'itempool_class_mods_05_legendary_exo_soldier'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "itempool'itempool_class_mods_05_legendary_gravitar'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "itempool'itempool_class_mods_05_legendary_paladin'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_enhancements_01_common",
+    "key": "itempool_enhancements_01_common",
+    "category": "enhancement",
+    "rarity": "common",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "defselector": "defselector'none'",
+      "mingamestage": "attribute'Att_MinGameStage_Enhancement'",
+      "itempool": "itempool_enhancements_01_common",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'DAD_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'JAK_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ORD_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TED_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ATL_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'COV_Enhancement.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'HYP_Enhancement.comp_01_common'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_enhancements_02_uncommon",
+    "key": "itempool_enhancements_02_uncommon",
+    "category": "enhancement",
+    "rarity": "uncommon",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'DAD_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'JAK_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ORD_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TED_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ATL_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'COV_Enhancement.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'HYP_Enhancement.comp_02_uncommon'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Enhancement'",
+      "itempool": "itempool_enhancements_02_uncommon",
+      "defselector": "defselector'none'"
+    }
+  },
+  {
+    "itempool": "itempool_enhancements_03_rare",
+    "key": "itempool_enhancements_03_rare",
+    "category": "enhancement",
+    "rarity": "rare",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "defselector": "defselector'none'",
+      "mingamestage": "attribute'Att_MinGameStage_Enhancement'",
+      "itempool": "itempool_enhancements_03_rare",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'DAD_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'JAK_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ORD_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TED_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ATL_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'COV_Enhancement.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'HYP_Enhancement.comp_03_rare'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_enhancements_04_epic",
+    "key": "itempool_enhancements_04_epic",
+    "category": "enhancement",
+    "rarity": "epic",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'DAD_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'JAK_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ORD_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TED_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ATL_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'COV_Enhancement.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'HYP_Enhancement.comp_04_epic'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Enhancement'",
+      "defselector": "defselector'none'",
+      "itempool": "itempool_enhancements_04_epic"
+    }
+  },
+  {
+    "itempool": "itempool_enhancements_05_legendary",
+    "key": "itempool_enhancements_05_legendary",
+    "category": "enhancement",
+    "rarity": "legendary",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "defselector": "defselector'none'",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'DAD_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'JAK_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ORD_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TED_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ATL_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'COV_Enhancement.comp_05_legendary'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'HYP_Enhancement.comp_05_legendary'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Enhancement'",
+      "itempool": "itempool_enhancements_05_legendary"
+    }
+  },
+  {
+    "itempool": "itempool_eridium_normal",
+    "key": "itempool_eridium_normal",
+    "category": "eridium",
+    "rarity": null,
+    "source": "001_pakchunk0-Windows_0_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_eridium_normal",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'none'"
+            },
+            "criteria": {
+              "preset": "criteria_preset'LootPreset_EridiumOnly'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_eridium_rich",
+    "key": "itempool_eridium_rich",
+    "category": "eridium",
+    "rarity": null,
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_eridium_rich",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'Currency_Eridium_SingleStack'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'Currency_Eridium_MultiStack'"
+            }
+          },
+          "weight": {
+            "postscale": "0.100000",
+            "datatablevalue": {
+              "datatable": "gbx_ue_data_table'none'"
+            }
+          }
+        }
+      ],
+      "defselector": "defselector'none'"
+    }
+  },
+  {
+    "itempool": "ItemPool_Event_Loot_Eridium",
+    "key": "itempool_event_loot_eridium",
+    "category": "eridium",
+    "rarity": null,
+    "source": "321_pakchunk6-Windows_8_P__Engine__Content___NCS__Nexus-Data-itempool6.ncs.bin.json",
+    "native_row": {
+      "itempool": "ItemPool_Event_Loot_Eridium",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'Currency_Eridium_MultiStack'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_repkit_01_common",
+    "key": "itempool_repkit_01_common",
+    "category": "repkit",
+    "rarity": "common",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_REPAIR_KIT.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_repair_kit.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_repair_kit.comp_01_common'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_repkit_01_common"
+    }
+  },
+  {
+    "itempool": "itempool_repkit_02_uncommon",
+    "key": "itempool_repkit_02_uncommon",
+    "category": "repkit",
+    "rarity": "uncommon",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_repkit_02_uncommon",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_REPAIR_KIT.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_repair_kit.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_repair_kit.comp_02_uncommon'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_repkit_03_rare",
+    "key": "itempool_repkit_03_rare",
+    "category": "repkit",
+    "rarity": "rare",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_repkit_03_rare",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_REPAIR_KIT.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_repair_kit.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_repair_kit.comp_03_rare'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_repkit_04_epic",
+    "key": "itempool_repkit_04_epic",
+    "category": "repkit",
+    "rarity": "epic",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_repkit_04_epic",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_REPAIR_KIT.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_repair_kit.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_repair_kit.comp_04_epic'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_repkit_05_legendary",
+    "key": "itempool_repkit_05_legendary",
+    "category": "repkit",
+    "rarity": "legendary",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_repkit_05_legendary",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_repair_kit.comp_05_legendary_AdrenalinePUmp'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_repair_kit.comp_05_legendary_Pacemaker'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_REPAIR_KIT.comp_05_legendary_Augmenter'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_repair_kit.comp_05_legendary_Defibrillator'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_repair_kit.comp_05_legendary_BloodAnalyzer'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_repair_kit.comp_05_legendary_ShinyWarPaint'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_repair_kit.comp_05_legendary_KillSpring'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_repair_kit.comp_05_legendary_TripleBypass'"
+            }
+          }
+        }
+      ],
+      "defselector": "defselector'none'"
+    }
+  },
+  {
+    "itempool": "itempool_shields_01_common",
+    "key": "itempool_shields_01_common",
+    "category": "shield",
+    "rarity": "common",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "handle": "inv'bor_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'dad_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'jak_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'mal_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ord_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ted_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'tor_shield.comp_01_common'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'vla_shield.comp_01_common'"
+          }
+        }
+      ],
+      "itempool": "itempool_shields_01_common"
+    }
+  },
+  {
+    "itempool": "itempool_shields_02_uncommon",
+    "key": "itempool_shields_02_uncommon",
+    "category": "shield",
+    "rarity": "uncommon",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_shields_02_uncommon",
+      "items": [
+        {
+          "item": {
+            "handle": "inv'bor_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'dad_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'jak_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'mal_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ord_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ted_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'tor_shield.comp_02_uncommon'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'vla_shield.comp_02_uncommon'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_shields_03_rare",
+    "key": "itempool_shields_03_rare",
+    "category": "shield",
+    "rarity": "rare",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_shields_03_rare",
+      "items": [
+        {
+          "item": {
+            "handle": "inv'bor_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'dad_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'jak_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'mal_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ord_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ted_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'tor_shield.comp_03_rare'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'vla_shield.comp_03_rare'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_shields_04_epic",
+    "key": "itempool_shields_04_epic",
+    "category": "shield",
+    "rarity": "epic",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_shields_04_epic",
+      "items": [
+        {
+          "item": {
+            "handle": "inv'bor_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'dad_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'jak_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'mal_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ord_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'ted_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'tor_shield.comp_04_epic'"
+          }
+        },
+        {
+          "item": {
+            "handle": "inv'vla_shield.comp_04_epic'"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_shields_05_legendary",
+    "key": "itempool_shields_05_legendary",
+    "category": "shield",
+    "rarity": "legendary",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'bor_shield.comp_05_legendary_Watts4Dinner'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_shield.comp_05_legendary_SuperSoldier'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_shield.comp_05_legendary_OnionLayeredGuard'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_shield.comp_05_legendary_ProteanCell'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'bor_shield.comp_05_legendary_Lightning'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_shield.comp_05_legendary_angel'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_shield.comp_05_legendary_barrelAged'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_shield.comp_05_legendary_cindershelly'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_shield.comp_05_momento'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_shield.comp_05_supernova'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_shield.comp_05_legendary_ShieldBoi'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_shield.comp_05_legendary_timekeeper'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_shield.comp_05_legendary_compleat'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_shield.comp_05_legendary_firewerks'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_shield.comp_05_legendary_HeavyWeight'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_shield.comp_05_legendary_Hoarder'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_shields_05_legendary"
+    }
+  },
+  {
+    "itempool": "itempool_grenade_gadgets_01_common",
+    "key": "itempool_grenade_gadgets_01_common",
+    "category": "ordnance",
+    "rarity": "common",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_grenade_gadgets_01_common",
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_Grenade'",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_01_common'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_grenade_gadgets_02_uncommon",
+    "key": "itempool_grenade_gadgets_02_uncommon",
+    "category": "ordnance",
+    "rarity": "uncommon",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_02_uncommon'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_Grenade'",
+      "itempool": "itempool_grenade_gadgets_02_uncommon"
+    }
+  },
+  {
+    "itempool": "itempool_grenade_gadgets_03_rare",
+    "key": "itempool_grenade_gadgets_03_rare",
+    "category": "ordnance",
+    "rarity": "rare",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_Grenade'",
+      "itempool": "itempool_grenade_gadgets_03_rare",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_03_rare'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_grenade_gadgets_04_epic",
+    "key": "itempool_grenade_gadgets_04_epic",
+    "category": "ordnance",
+    "rarity": "epic",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_04_epic'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_Grenade'",
+      "itempool": "itempool_grenade_gadgets_04_epic"
+    }
+  },
+  {
+    "itempool": "itempool_grenade_gadgets_05_legendary",
+    "key": "itempool_grenade_gadgets_05_legendary",
+    "category": "ordnance",
+    "rarity": "legendary",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_05_legendary_ShoKunai'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_05_legendary_PredatorDrone'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'jak_grenade_gadget.comp_05_spinning_blade'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ted_grenade_gadget.comp_05_legendary_FaultyDetonator'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_05_legendary_buoy'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'borg_grenade_gadget.comp_05_legendary_rubber'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_05_legendary_Axe'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'dad_grenade_gadget.comp_05_legendary_fuse'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_05_legendary_disco_disc'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'mal_grenade_gadget.comp_05_legendary_recursive'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_05_legendary_aggrovator'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'ord_grenade_gadget.comp_05_legendary_swarm'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_05_legendary_firepot'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'tor_grenade_gadget.comp_05_legendary_slippy'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_05_legendary_Blockbuster'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'vla_grenade_gadget.comp_05_legendary_Waterfall'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_grenade_gadgets_05_legendary",
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_Grenade'"
+    }
+  },
+  {
+    "itempool": "itempool_hw_01_common",
+    "key": "itempool_hw_01_common",
+    "category": "heavy",
+    "rarity": "common",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_hw_01_common",
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_HeavyWeapon'",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_01_common'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_01_common'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_hw_02_uncommon",
+    "key": "itempool_hw_02_uncommon",
+    "category": "heavy",
+    "rarity": "uncommon",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_HeavyWeapon'",
+      "itempool": "itempool_hw_02_uncommon",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_02_uncommon'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_02_uncommon'"
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "itempool": "itempool_hw_03_rare",
+    "key": "itempool_hw_03_rare",
+    "category": "heavy",
+    "rarity": "rare",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "itempool": "itempool_hw_03_rare",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_03_rare'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_03_rare'"
+            }
+          }
+        }
+      ],
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_HeavyWeapon'"
+    }
+  },
+  {
+    "itempool": "itempool_hw_04_epic",
+    "key": "itempool_hw_04_epic",
+    "category": "heavy",
+    "rarity": "epic",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_HeavyWeapon'",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_04_epic'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_04_epic'"
+            }
+          }
+        }
+      ],
+      "itempool": "itempool_hw_04_epic"
+    }
+  },
+  {
+    "itempool": "itempool_hw_05_legendary",
+    "key": "itempool_hw_05_legendary",
+    "category": "heavy",
+    "rarity": "legendary",
+    "source": "014_pakchunk0-Windows_20_P__Engine__Content___NCS__Nexus-Data-itempool0.ncs.bin.json",
+    "native_row": {
+      "mingamestage": "attribute'Att_MinGameStage_Gadget_HeavyWeapon'",
+      "itempool": "itempool_hw_05_legendary",
+      "items": [
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_05_legendary_BottledLightning'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_05_legendary_DiscJockey'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'MAL_HW.comp_05_legendary_GammaVoid'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'BOR_HW.comp_05_legendary_Streamer'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_05_legendary_Javelin'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'TOR_HW.comp_05_legendary_ravenfire'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_05_legendary_AtlingGun'"
+            }
+          }
+        },
+        {
+          "item": {
+            "item": {
+              "handle": "inv'VLA_HW.comp_05_legendary_Splatoon'"
+            }
+          }
+        }
+      ]
+    }
+  }
+]

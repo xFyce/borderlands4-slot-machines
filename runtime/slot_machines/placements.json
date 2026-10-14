@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "note": "Nine player-approved cabinet placements. User placement overrides take priority.",
+  "machines": [
+    {
+      "id": "launchpad",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "IO_PlayerBank_UAID_CC96E5191F7424F201_1304152056",
+      "height": 300.0,
+      "candidates": [
+        [
+          -114366.776999653,
+          192190.7218549416,
+          9817.395076013425,
+          145.45670137904858
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "bones_of_sanctuary",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "IO_PlayerBank_UAID_CC96E5191F746C6502_1495188169",
+      "height": 300.0,
+      "candidates": [
+        [
+          394456.3281752509,
+          -34468.587908518355,
+          35254.852823026464,
+          -160.82773008466222
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "carcadia",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "IO_PlayerBank_UAID_089204DCF69BA61902_1452329122",
+      "height": 300.0,
+      "candidates": [
+        [
+          -58685.35920930072,
+          -230630.2496734314,
+          14032.341790293207,
+          -100.92908639405111
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "beltons_bore",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "IO_PlayerBank_UAID_08BFB89AE7C8092402_1448484101",
+      "height": 300.0,
+      "candidates": [
+        [
+          195372.42305702236,
+          -143383.22655435483,
+          32752.343829325328,
+          -64.4299422911592
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "moxxis_bar_1",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "BPP_PFA_BorderlandsScience_Moxxis_C_UAID_E04F43E661C13D5802_7df3c35678bfaadf_2013832159",
+      "height": 300.0,
+      "candidates": [
+        [
+          -162756.8885820495,
+          -225653.01035493845,
+          10475.999642574028,
+          -175.0
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "moxxis_bar_2",
+      "world": "/Game/Maps/WorldLevels/World_P.World_P",
+      "anchor": "BPP_PFA_BorderlandsScience_Moxxis_C_UAID_E04F43E661C13D5802_7df3c35678bfaadf_2013832159",
+      "height": 300.0,
+      "candidates": [
+        [
+          -162772.57661574407,
+          -225473.69530928193,
+          10475.999642574028,
+          -175.0
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "speakeasy_1",
+      "world": "/Game/DLC/Cowbell/Maps/Cowbell_P.Cowbell_P",
+      "anchor": "IO_PlayerBank_UAID_08BFB84C85056F9102_73f71a1bd4448613_1163727200",
+      "height": 300.0,
+      "candidates": [
+        [
+          -176133.10954653655,
+          124203.39304174176,
+          25651.569763905365,
+          90.0
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "speakeasy_2",
+      "world": "/Game/DLC/Cowbell/Maps/Cowbell_P.Cowbell_P",
+      "anchor": "IO_PlayerBank_UAID_08BFB84C85056F9102_73f71a1bd4448613_1163727200",
+      "height": 300.0,
+      "candidates": [
+        [
+          -175953.10954653655,
+          124203.39304174176,
+          25651.569763905365,
+          90.0
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    },
+    {
+      "id": "story_pack_2_hub_1",
+      "world": "/Game/DLC/Harmonica/Maps/Harmonica_P.Harmonica_P",
+      "anchor": "IO_PlayerBank_UAID_04D9F5F6A695FE9C02_1257531942",
+      "height": 300.0,
+      "candidates": [
+        [
+          7464.317784519192,
+          -26888.14272366106,
+          19776.000676877764,
+          159.65236456437344
+        ]
+      ],
+      "saved_position": true,
+      "placement_note": "Player-approved final placement; preserve its floor height and wall clearance."
+    }
+  ]
+}

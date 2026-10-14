@@ -1,0 +1,5 @@
+Weapon pool names and native UMG construction approach referenced from Matt / FunkYouSHiFT
+https://github.com/funkyoushift/MattsSDKBoostingTools
+MIT license included in THIRD_PARTY_LICENSE.txt.
+Only 25 generic weapon pool catalog entries are included; no source module copied.
+Catalog provenance is community game-data extraction; runtime availability still requires testing.

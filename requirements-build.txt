@@ -1,0 +1,4 @@
+PyInstaller==6.22.3
+pyinstaller-hooks-contrib==2026.8
+Pillow==12.3.0
+numpy==2.3.5
